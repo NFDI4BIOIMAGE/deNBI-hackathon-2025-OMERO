@@ -1,5 +1,5 @@
 # Deployment
-
+```
 cp ~/Documents/Software/omero-parade-crossfilter/flake.nix .
 cp ~/Documents/Software/omero-parade-crossfilter/.envrc .
 direnv allow
@@ -29,4 +29,5 @@ sed -i '1s|^#!.*|#!/usr/bin/env bash|' *.sh 2>/dev/null || true
 docker compose up -d
 
 connect to https://127.0.0.1:4080 
-user root password omero
+# user root password omero
+```
