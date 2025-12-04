@@ -1,0 +1,116 @@
+[project]
+name = "omero-web-dev"
+version = "0.1.0"
+description = "Local omero-web + plugins dev environment (server+DB via Docker)."
+requires-python = ">=3.12,<3.13"
+
+# Base runtime deps for omero-web + common utilities you actually use
+dependencies = [
+  # OMERO web stack
+  "omero-web==5.29.2",
+  "Django==4.2.24",
+  # OMERO plugins
+  "parade-crossfilter",
+  "omero-iviewer",
+  "omero-tagsearch",
+  "omero-figure",
+
+  # Ice Python bindings (Wheel for CPython 3.12 on manylinux_2_28)
+  # If you ever change Python version, update this URL accordingly.
+  "zeroc-ice @ https://github.com/glencoesoftware/zeroc-ice-py-linux-x86_64/releases/download/20240202/zeroc_ice-3.6.5-cp312-cp312-manylinux_2_28_x86_64.whl",
+
+  # Utilities seen in your env / commonly required by omero-web & plugins
+  "pillow==11.3.0",
+  "numpy==2.3.3",
+  "psutil==7.1.0",
+  "requests==2.32.5",
+  "python-dateutil==2.9.0.post0",
+  "pytz==2025.2",
+  "concurrent-log-handler==0.9.28",
+  "portalocker==3.2.0",
+
+  # omero-web extras you've used
+  "django-cors-headers==3.7.0",
+  "django-pipeline==4.1.0",
+  "whitenoise==6.11.0",
+  "gunicorn==23.0.0",
+
+  # OMERO libs you had pinned
+  "omero-marshal==0.9.0",
+]
+
+[project.optional-dependencies]
+# Only install this group if/when you need notebooks & lab:
+jupyter = [
+  "jupyter==1.1.1",
+  "ipython==9.5.0",
+  "ipykernel==6.30.1",
+  "jupyterlab==4.4.7",
+  "jupyterlab-server==2.27.3",
+  "jupyterlab-pygments==0.3.0",
+  "jupyterlab-widgets==3.0.15",
+  "jupyter-client==8.6.3",
+  "jupyter-console==6.6.3",
+  "jupyter-core==5.8.1",
+  "jupyter-events==0.12.0",
+  "jupyter-server==2.17.0",
+  "jupyter-server-terminals==0.5.3",
+  "ipywidgets==8.1.7",
+  "notebook==7.4.5",
+  "notebook-shim==0.2.4",
+  "debugpy==1.8.17",
+  "matplotlib-inline==0.1.7",
+  "nest-asyncio==1.6.0",
+  "traitlets==5.14.3",
+  "tornado==6.5.2",
+  "pyzmq==27.1.0",
+  "nbformat==5.10.4",
+  "nbconvert==7.16.6",
+  "nbclient==0.10.2",
+  "bleach==6.2.0",
+  "jsonschema==4.25.1",
+  "jsonschema-specifications==2025.9.1",
+  "referencing==0.36.2",
+  "rpds-py==0.27.1",
+  "tinycss2==1.4.0",
+  "webcolors==24.11.1",
+  "webencodings==0.5.1",
+  "send2trash==1.8.3",
+  "prometheus-client==0.23.1",
+  "jinja2==3.1.6",
+  "markupsafe==3.0.2",
+  "pandocfilters==1.5.1",
+  "json5==0.12.1",
+  "anyio==4.10.0",
+  "httpx==0.28.1",
+  "httpcore==1.0.9",
+  "h11==0.16.0",
+  "idna==3.10",
+  "urllib3==2.5.0",
+  "certifi==2025.8.3",
+  "charset-normalizer==3.4.3",
+  "attrs==25.3.0",
+  "executing==2.2.1",
+  "stack-data==0.6.3",
+  "pure-eval==0.2.3",
+  "pygments==2.19.2",
+  "wcwidth==0.2.13",
+  "packaging==25.0",
+  "typing-extensions==4.15.0",
+  "six==1.17.0",
+  "parso==0.8.5",
+  "jedi==0.19.2",
+  # keep the rest minimal; the above pulls the rest of lab’s tree
+]
+
+[tool.uv]
+# You can add more dev tools here if you like, e.g. "ruff", "mypy", etc.
+# dev-dependencies = ["ruff", "mypy"]
+
+# Make your local checkouts installable in editable mode:
+[tool.uv.sources]
+omero-py = { path = "./omero-py", editable = true }
+# The python package is "omero-iviewer" but sources live in the "plugin" dir
+"omero-iviewer" = { path = "./omero-iviewer/plugin", editable = true }
+parade-crossfilter = { path = "./parade-crossfilter", editable = true }
+omero-tagsearch = { path = "./omero-tagsearch", editable = true }
