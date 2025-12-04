@@ -1,10 +1,10 @@
 # Deployment
 ```
-cp ~/Documents/Software/omero-parade-crossfilter/flake.nix .
-cp ~/Documents/Software/omero-parade-crossfilter/.envrc .
-direnv allow
-cp ~/Documents/Software/omero-parade-crossfilter/uv.lock .
-cp ~/Documents/Software/omero-parade-crossfilter/pyproject.toml .
+# git init && git add * && git commit -m 'initial commit'
+direnv allow .
+uv python install 3.12
+uv venv --python 3.12
+
 git clone git@github.com:German-BioImaging/omero-tagsearch.git
 git clone git@github.com:ome/omero-iviewer.git
 git clone git@github.com:ome/omero-figure.git
@@ -12,6 +12,7 @@ git clone git@github.com:ome/omero-py.git
 git clone git@github.com:ome/omero-web.git
 git clone git@github.com:will-moore/parade-crossfilter.git
 git clone git@github.com:ome/docker-example-omero.git
+
 uv sync
 source ./venv/bin/activate
 
